@@ -1,4 +1,4 @@
-import { defineDB, defineTable, column } from 'astro:db';
+import { defineDb, defineTable, column } from 'astro:db';
 
 const GridCell = defineTable({
     columns: {
@@ -7,6 +7,6 @@ const GridCell = defineTable({
         value: column.text(),
     }
 })
-export default defineDB({
+export default defineDb({
     tables: {GridCell},
 })
