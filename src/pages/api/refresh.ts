@@ -1,7 +1,11 @@
-import { db, GridCell } from "astro:db";
-
 export async function GET() {
-  const cells = await db.select().from(GridCell).all();
+
+  // !!!
+  // TODO: Update the cell with the new value color
+  // const cells = ...
+  // !!!
+    
+  const cells = [] as any[];
   return new Response(JSON.stringify(cells), {
     headers: {
       "content-type": "application/json",
