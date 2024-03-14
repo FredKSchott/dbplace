@@ -1,3 +1,4 @@
+import { and, db, eq, GridCell } from "astro:db";
 import { LRUCache } from "lru-cache";
 const LIMIT = 30;
 const tokenCache = new LRUCache<string, [number]>({
@@ -36,13 +37,12 @@ export async function POST({ request, clientAddress}: any) {
             return res;
         }
     }
-
-  // !!!
-  // TODO: Update the cell with the new value color
-  // await db...
-  // !!!
-
-  return new Response(JSON.stringify({success: true}), {
+  const cells = await db
+    .update(GridCell)
+    .set({ value })
+    .where(and(eq(GridCell.x, x), eq(GridCell.y, y)))
+    .run();
+  return new Response(JSON.stringify(cells), {
     headers: { ...res.headers, "content-type": "application/json" },
   });
 }
