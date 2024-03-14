@@ -37,12 +37,12 @@ export async function POST({ request, clientAddress}: any) {
             return res;
         }
     }
-  const cells = await db
+  await db
     .update(GridCell)
     .set({ value })
     .where(and(eq(GridCell.x, x), eq(GridCell.y, y)))
     .run();
-  return new Response(JSON.stringify(cells), {
+  return new Response(JSON.stringify({success: true}), {
     headers: { ...res.headers, "content-type": "application/json" },
   });
 }
