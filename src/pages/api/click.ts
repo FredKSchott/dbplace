@@ -1,4 +1,3 @@
-import { and, db, eq, GridCell } from "astro:db";
 import { LRUCache } from "lru-cache";
 const LIMIT = 30;
 const tokenCache = new LRUCache<string, [number]>({
@@ -21,28 +20,32 @@ function checkRateLimit(res: Response, ip: string) {
     res = new Response("Rate limit exceeded", { status: 429 });
   }
   res.headers.set("X-RateLimit-Limit", String(LIMIT));
-  res.headers.set("X-RateLimit-Remaining", String(isRateLimited ? 0 : LIMIT - currentUsage));
+  res.headers.set(
+    "X-RateLimit-Remaining",
+    String(isRateLimited ? 0 : LIMIT - currentUsage)
+  );
   return res;
 }
 
-export async function POST({ request, clientAddress}: any) {
+export async function POST({ request, clientAddress }: any) {
   const { x, y, value } = await request.json();
   if (x < 0 || x >= 80 || y < 0 || y >= 40) {
     return new Response("Invalid coordinates", { status: 400 });
   }
-    let res = new Response();
-    if (clientAddress) {
-        res = checkRateLimit(res, clientAddress);
-        if (res.status === 429) {
-            return res;
-        }
+  let res = new Response();
+  if (clientAddress) {
+    res = checkRateLimit(res, clientAddress);
+    if (res.status === 429) {
+      return res;
     }
-  await db
-    .update(GridCell)
-    .set({ value })
-    .where(and(eq(GridCell.x, x), eq(GridCell.y, y)))
-    .run();
-  return new Response(JSON.stringify({success: true}), {
+  }
+
+  // !!!
+  // TODO: Update the cell with the new value color
+  // await db...
+  // !!!
+
+  return new Response(JSON.stringify({ success: true }), {
     headers: { ...res.headers, "content-type": "application/json" },
   });
 }
