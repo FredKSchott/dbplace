@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.5.9
     version: 0.5.9(typescript@5.4.2)
   '@astrojs/db':
-    specifier: ^0.8.3
-    version: 0.8.3(@types/react@18.2.66)(react@18.2.0)
+    specifier: ^0.8.5
+    version: 0.8.5(@types/react@18.2.66)(react@18.2.0)
   '@astrojs/node':
     specifier: ^8.2.3
     version: 8.2.3(astro@4.5.4)
@@ -73,8 +73,8 @@ packages:
     resolution: {integrity: sha512-XpC8MAaWjD1ff6/IfkRq/5k1EFj6zhCNqXRd5J43SVJEBj/Bsmizkm8N0xOYscGcDFQkRgEw6/eKnI5x/1l6aA==}
     dev: false
 
-  /@astrojs/db@0.8.3(@types/react@18.2.66)(react@18.2.0):
-    resolution: {integrity: sha512-e2+UY0PW1CJeQUzHeTl+8ATD+ELD2ITrybh0OD1yYrCb62mltncvCNBsuKJsQqexgOr2oo8Cetds9bRbnPrBaA==}
+  /@astrojs/db@0.8.5(@types/react@18.2.66)(react@18.2.0):
+    resolution: {integrity: sha512-XtlkTGt3gXFFntQXc0aasfPwUxF/IvkBFszu9e1ARjE362uO5Eq9YmGxwBoBXD0FR8jy2eLLsNoEbgfJZZue4w==}
     dependencies:
       '@libsql/client': 0.5.6
       async-listen: 3.0.1
